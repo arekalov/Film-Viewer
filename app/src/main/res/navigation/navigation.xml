@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/home_menu_item"
-        android:name="com.pro.film_viewer.Home"
+        android:name="com.pro.film_viewer.fragments.Home"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/favorite_menu_item"
-        android:name="com.pro.film_viewer.Favorite"
+        android:name="com.pro.film_viewer.fragments.Favorite"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
 </navigation>

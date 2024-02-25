@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Film_Viewer</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="favoriteMenuTitle">Favorite</string>
-    <string name="homeMenuTitle">Home</string>
+    <string name="favoriteMenuTitle">Любимые</string>
+    <string name="homeMenuTitle">Популярные</string>
+    <string name="content">Content</string>
+    <string name="testTitle">FilmName\n</string>
+    <string name="testGenre">genre</string>
+    <string name="testYear">(year)</string>
 </resources>
