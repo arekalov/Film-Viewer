@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pro.film_viewer.adapters.TopFilmsAdapter
 import com.pro.film_viewer.databinding.FragmentHomeBinding
@@ -41,6 +43,8 @@ class Home : Fragment() {
 
     private fun prepareRecyclerAdapter() {
         topFilmsAdapter = TopFilmsAdapter()
+        val dividerItemDecoration = DividerItemDecoration(binding.rvFilms.context, LinearLayoutManager.VERTICAL)
+        binding.rvFilms.addItemDecoration(dividerItemDecoration)
         binding.rvFilms.apply {
             adapter = topFilmsAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -50,6 +54,7 @@ class Home : Fragment() {
     private fun observeTopFilms() {
         topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer {
             films ->
+
             topFilmsAdapter.setTopFilmsList(films)
         })
     }

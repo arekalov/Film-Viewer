@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="110dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="5dp">
 
@@ -15,7 +15,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="15dp"
         android:src="@drawable/film_banner_test"
-        android:contentDescription="@string/content" />
+        android:contentDescription="@string/content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"/>
 
     <TextView
         android:id="@+id/tv_film_title"
@@ -29,6 +31,7 @@
         app:layout_constraintStart_toEndOf="@id/iv_film_banner"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="@dimen/_25sdp"
+        android:textSize="@dimen/_15ssp"
         android:ellipsize="end"
         android:maxLines="1"/>
 
@@ -36,14 +39,13 @@
         android:id="@+id/tv_genre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_25sdp"
         android:text="@string/testGenre"
-        android:textSize="@dimen/_15ssp"
+        android:textSize="@dimen/_12ssp"
         android:textColor="@color/light_black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_year"
         app:layout_constraintHorizontal_bias="0.005"
-        app:layout_constraintStart_toEndOf="@id/iv_film_banner"
+        app:layout_constraintStart_toStartOf="@id/tv_film_title"
         app:layout_constraintTop_toBottomOf="@id/tv_film_title"
         android:ellipsize="end"
         android:maxLines="1"/>
@@ -59,7 +61,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:textColor="@color/light_black"
-        android:textSize="@dimen/_15ssp"/>
+        android:textSize="@dimen/_12ssp"/>
 
     <ImageView
         android:id="@+id/iv_favorite_icon"
