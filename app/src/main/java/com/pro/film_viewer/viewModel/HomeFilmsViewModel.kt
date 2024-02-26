@@ -11,17 +11,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TopFilmsViewModel : ViewModel() {
+class HomeFilmsViewModel : ViewModel() {
     val topFilmsLiveData = MutableLiveData<List<Item>>()
 
     fun getTopFilms(){
-        KinopoiskApiInstance.api.getTopFilms("TOP_POPULAR_ALL").enqueue(object : Callback<TopFilms>{
+        KinopoiskApiInstance.api.getTopFilms("e30ffed0-76ab-4dd6-b41f-4c9da2b2735b", "application/json").enqueue(object : Callback<TopFilms>{
             override fun onResponse(call: Call<TopFilms>, response: Response<TopFilms>) {
                 if (response.body() != null) {
                     topFilmsLiveData.value = response.body()!!.items
-                    for (i in response.body()!!.items){
-                        Log.e("!!!!!!!!!", i.nameOriginal)
-                    }
+                }
+                else {
+                    Log.e("Error", "Empty body.string")
                 }
             }
 

@@ -14,4 +14,8 @@ data class Item(
     val ratingKinopoisk: Double,
     val type: String,
     val year: Int
-)
+) {
+    public fun getStringGenres(): String {
+        return genres.joinToString(separator = ", ")
+    }
+}

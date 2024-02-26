@@ -30,9 +30,9 @@ class TopFilmsAdapter : RecyclerView.Adapter<TopFilmsAdapter.TopFilmsViewHolder>
     override fun getItemCount(): Int {
         return topFilmList.size
     }
-
-    // TODO: add all fields
     override fun onBindViewHolder(holder: TopFilmsViewHolder, position: Int) {
-        holder.binding.ivFilmTitle.text = topFilmList[position].nameRu
+        holder.binding.tvFilmTitle.text = topFilmList[position].nameRu
+        holder.binding.tvGenre.text = topFilmList[position].getStringGenres()
+        holder.binding.tvYear.text = topFilmList[position].year.toString()
     }
 }
