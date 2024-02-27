@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.pro.film_viewer.R
 import com.pro.film_viewer.adapters.TopFilmsAdapter
 import com.pro.film_viewer.databinding.FragmentHomeBinding
 import com.pro.film_viewer.viewModel.HomeFilmsViewModel
@@ -39,6 +41,14 @@ class Home : Fragment() {
         prepareRecyclerAdapter()
         observeTopFilms()
         topFilmsViewModel.getTopFilms()
+        onFilmClickListener()
+    }
+
+    private fun onFilmClickListener() {
+        topFilmsAdapter.onClick = {
+            film ->
+            findNavController().navigate(R.id.detailFilmFragment)
+        }
     }
 
     private fun prepareRecyclerAdapter() {
