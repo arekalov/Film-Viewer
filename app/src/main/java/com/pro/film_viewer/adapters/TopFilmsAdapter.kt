@@ -11,6 +11,7 @@ import com.pro.film_viewer.pojo.Item
 class TopFilmsAdapter : RecyclerView.Adapter<TopFilmsAdapter.TopFilmsViewHolder>() {
     inner class TopFilmsViewHolder(val binding: FilmCardBinding) : RecyclerView.ViewHolder(binding.root)
     private var topFilmList = ArrayList<Item>()
+    var onClick: ((Item) -> Unit)? = null
 
     // TODO: add difutil
     fun setTopFilmsList(list: List<Item>) {
@@ -38,5 +39,8 @@ class TopFilmsAdapter : RecyclerView.Adapter<TopFilmsAdapter.TopFilmsViewHolder>
         Glide.with(holder.itemView)
             .load(topFilmList[position].posterUrlPreview)
             .into(holder.binding.ivFilmBanner)
+        holder.itemView.setOnClickListener{
+            onClick!!.invoke(topFilmList[position])
+        }
     }
 }
