@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_menu_item"
-        android:name="com.pro.film_viewer.fragments.Home"
+        android:name="com.pro.film_viewer.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
-        android:name="com.pro.film_viewer.fragments.Favorite"
+        android:name="com.pro.film_viewer.fragments.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
@@ -33,4 +33,9 @@
         android:label="fragment_detail_film"
         tools:layout="@layout/fragment_detail_film" >
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.pro.film_viewer.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

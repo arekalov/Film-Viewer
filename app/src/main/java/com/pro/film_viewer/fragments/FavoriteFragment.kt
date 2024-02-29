@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.pro.film_viewer.R
 
-class Favorite : Fragment() {
+class FavoriteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
