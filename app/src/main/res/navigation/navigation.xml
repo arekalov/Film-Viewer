@@ -26,6 +26,9 @@
             app:destination="@id/searchFragment"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_home_menu_item_to_noInternetFragment"
+            app:destination="@id/noInternetFragment" />
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
@@ -53,4 +56,9 @@
                 app:argType="string"/>
         </action>
     </fragment>
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.pro.film_viewer.fragments.NoInternetFragment"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" />
 </navigation>
