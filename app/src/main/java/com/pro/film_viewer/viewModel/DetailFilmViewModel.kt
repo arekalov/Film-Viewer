@@ -14,12 +14,10 @@ class DetailFilmViewModel : ViewModel() {
     val detailFilmLiveData = MutableLiveData<Film>()
 
     fun getDetailFilm(id : String) {
-        Log.e("!!!!!!!!", id)
         KinopoiskApiInstance.api.getFilmById(id).enqueue(object : Callback<Film>{
             override fun onResponse(call: Call<Film>, response: Response<Film>) {
                 if (response.body() != null) {
                     detailFilmLiveData.value = response.body()
-                    Log.e("!!!!!!!!", response.body().toString())
                 }
                 else {
                     Log.e("error", "null body during getDetailFilm")
