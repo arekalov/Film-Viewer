@@ -82,7 +82,13 @@ class SearchFragment : Fragment() {
         searchedFilmsViewModel.observeSearchedFilmsLiveData().observe(viewLifecycleOwner, Observer {
             films->
             if (films.searchFilmsCountResult != 0) {
+                binding.rvFilms.visibility = View.VISIBLE
+                binding.ivNotFound.visibility = View.INVISIBLE
                 filmsAdapter.setTopFilmsList(films.films)
+            }
+            else {
+                binding.rvFilms.visibility = View.INVISIBLE
+                binding.ivNotFound.visibility = View.VISIBLE
             }
         })
     }
