@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.pro.film_viewer.databinding.FragmentHomeBinding
 import com.pro.film_viewer.retrofit.ConnectionLiveData
 import com.pro.film_viewer.viewModel.HomeFilmsViewModel
 import com.pro.film_viewer.viewModel.HomeFilmsViewModelFactory
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -39,7 +42,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeNetwork()
+        lifecycleScope.launch {
+            observeNetwork()
+            delay(100)
+            checkNetwork()
+        }
 
         prepareRecyclerAdapter()
         observeTopFilms()
@@ -52,9 +59,13 @@ class HomeFragment : Fragment() {
     private fun observeNetwork() {
         connectionLiveData = ConnectionLiveData(requireActivity().application)
         connectionLiveData.observe(viewLifecycleOwner){
-
         }
+    }
 
+    private fun checkNetwork(){
+        if (connectionLiveData.value == null || connectionLiveData.value == false) {
+            findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
+        }
     }
 
 
@@ -68,8 +79,14 @@ class HomeFragment : Fragment() {
     private fun onFilmClickListener() {
         topFilmsAdapter.onClick = {
             film ->
-            val action = HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
-            findNavController().navigate(action)
+            if (connectionLiveData.value == false) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
+            }
+            else {
+                val action =
+                    HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
+                findNavController().navigate(action)
+            }
         }
     }
 
