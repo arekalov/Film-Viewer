@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pro.film_viewer.adapters.TopFilmsAdapter
@@ -16,7 +16,7 @@ import com.pro.film_viewer.viewModel.HomeFilmsViewModel
 import com.pro.film_viewer.viewModel.HomeFilmsViewModelFactory
 
 
-class Home : Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var topFilmsAdapter: TopFilmsAdapter
     private lateinit var topFilmsViewModel: HomeFilmsViewModel
@@ -39,6 +39,24 @@ class Home : Fragment() {
         prepareRecyclerAdapter()
         observeTopFilms()
         topFilmsViewModel.getTopFilms()
+        onFilmClickListener()
+
+        onSearchIconClickListener()
+    }
+
+    private fun onSearchIconClickListener() {
+        binding.ivSearchIcon.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun onFilmClickListener() {
+        topFilmsAdapter.onClick = {
+            film ->
+            val action = HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
+            findNavController().navigate(action)
+        }
     }
 
     private fun prepareRecyclerAdapter() {
@@ -54,7 +72,6 @@ class Home : Fragment() {
     private fun observeTopFilms() {
         topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer {
             films ->
-
             topFilmsAdapter.setTopFilmsList(films)
         })
     }

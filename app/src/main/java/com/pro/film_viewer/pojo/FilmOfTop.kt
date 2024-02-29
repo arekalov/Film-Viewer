@@ -1,6 +1,6 @@
 package com.pro.film_viewer.pojo
 
-data class Item(
+data class FilmOfTop(
     val countries: List<Country>,
     val genres: List<Genre>,
     val imdbId: String,

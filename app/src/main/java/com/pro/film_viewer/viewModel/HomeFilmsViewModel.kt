@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pro.film_viewer.pojo.Item
+import com.pro.film_viewer.pojo.FilmOfTop
 import com.pro.film_viewer.pojo.TopFilms
 import com.pro.film_viewer.retrofit.KinopoiskApiInstance
 import retrofit2.Call
@@ -12,10 +12,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFilmsViewModel : ViewModel() {
-    val topFilmsLiveData = MutableLiveData<List<Item>>()
+    val topFilmsLiveData = MutableLiveData<List<FilmOfTop>>()
 
     fun getTopFilms(){
-        KinopoiskApiInstance.api.getTopFilms("e30ffed0-76ab-4dd6-b41f-4c9da2b2735b", "application/json").enqueue(object : Callback<TopFilms>{
+        KinopoiskApiInstance.api.getTopFilms().enqueue(object : Callback<TopFilms>{
             override fun onResponse(call: Call<TopFilms>, response: Response<TopFilms>) {
                 if (response.body() != null) {
                     topFilmsLiveData.value = response.body()!!.items
@@ -32,5 +32,5 @@ class HomeFilmsViewModel : ViewModel() {
         })
     }
 
-    fun observeTopFilmsLiveData(): LiveData<List<Item>> = topFilmsLiveData
+    fun observeTopFilmsLiveData(): LiveData<List<FilmOfTop>> = topFilmsLiveData
 }
