@@ -1,23 +1,27 @@
 package com.pro.film_viewer.fragments
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pro.film_viewer.adapters.SearchedFilmsAdapter
-import com.pro.film_viewer.adapters.TopFilmsAdapter
 import com.pro.film_viewer.databinding.FragmentSearchBinding
 import com.pro.film_viewer.viewModel.SearchViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
@@ -61,7 +65,6 @@ class SearchFragment : Fragment() {
         filmsAdapter.onClick = {
             film ->
             Log.e("fsdafdsaf", film.toString())
-//            Log.e("id", film.kinopoiskId.toString())
                 val action = SearchFragmentDirections.actionSearchFragmentToDetailFilmFragment(film.filmId.toString())
                 findNavController().navigate(action)
         }
