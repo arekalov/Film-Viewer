@@ -1,6 +1,7 @@
 package com.pro.film_viewer.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +38,7 @@ class DetailFilmFragment : Fragment() {
     private fun observeDetailFilmViewModel() {
         detailFilmViewModel.observeDetailFilmLiveData().observe(viewLifecycleOwner, Observer {
             film ->
-            binding.tvTitle.text = film.nameRu
+            binding.tvFilmTitle.text = film.nameRu
             binding.tvDescription.text = film.description
             binding.tvGenres.text = getString(R.string.testGenre) + " " +film.getStringGenres()
             binding.tvCountries.text = getString(R.string.countries) + " " +film.getStringCountries()

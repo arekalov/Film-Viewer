@@ -21,6 +21,11 @@
                 android:name="filmId"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_home_menu_item_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
@@ -37,5 +42,15 @@
         android:id="@+id/searchFragment"
         android:name="com.pro.film_viewer.fragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFilmFragment"
+            app:destination="@id/detailFilmFragment"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+            <argument
+                android:name="filmId"
+                app:argType="string"/>
+        </action>
+    </fragment>
 </navigation>

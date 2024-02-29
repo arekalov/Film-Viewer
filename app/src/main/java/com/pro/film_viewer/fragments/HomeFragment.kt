@@ -40,6 +40,15 @@ class HomeFragment : Fragment() {
         observeTopFilms()
         topFilmsViewModel.getTopFilms()
         onFilmClickListener()
+
+        onSearchIconClickListener()
+    }
+
+    private fun onSearchIconClickListener() {
+        binding.ivSearchIcon.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun onFilmClickListener() {

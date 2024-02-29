@@ -8,4 +8,5 @@
     <string name="testGenre">Жанры: </string>
     <string name="testYear">(год)</string>
     <string name="countries">Страны: </string>
+    <string name="enterFilmName">Введите название фильма</string>
 </resources>
