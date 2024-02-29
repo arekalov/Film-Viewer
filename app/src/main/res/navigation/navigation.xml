@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_home_menu_item_to_noInternetFragment"
             app:destination="@id/noInternetFragment" />
+        <action
+            android:id="@+id/action_home_menu_item_self"
+            app:destination="@id/home_menu_item" />
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
@@ -39,8 +42,7 @@
         android:id="@+id/detailFilmFragment"
         android:name="com.pro.film_viewer.fragments.DetailFilmFragment"
         android:label="fragment_detail_film"
-        tools:layout="@layout/fragment_detail_film" >
-    </fragment>
+        tools:layout="@layout/fragment_detail_film" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.pro.film_viewer.fragments.SearchFragment"
@@ -55,6 +57,9 @@
                 android:name="filmId"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_searchFragment_to_noInternetFragment"
+            app:destination="@id/noInternetFragment" />
     </fragment>
     <fragment
         android:id="@+id/noInternetFragment"
