@@ -1,21 +1,20 @@
 package com.pro.film_viewer.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pro.film_viewer.databinding.FilmCardBinding
-import com.pro.film_viewer.pojo.Item
+import com.pro.film_viewer.pojo.FilmOfTop
 
 class TopFilmsAdapter : RecyclerView.Adapter<TopFilmsAdapter.TopFilmsViewHolder>() {
     inner class TopFilmsViewHolder(val binding: FilmCardBinding) : RecyclerView.ViewHolder(binding.root)
-    private var topFilmList = ArrayList<Item>()
-    var onClick: ((Item) -> Unit)? = null
+    private var topFilmList = ArrayList<FilmOfTop>()
+    var onClick: ((FilmOfTop) -> Unit)? = null
 
     // TODO: add difutil
-    fun setTopFilmsList(list: List<Item>) {
-        topFilmList = list as ArrayList<Item>
+    fun setTopFilmsList(list: List<FilmOfTop>) {
+        topFilmList = list as ArrayList<FilmOfTop>
         notifyDataSetChanged()
     }
 
