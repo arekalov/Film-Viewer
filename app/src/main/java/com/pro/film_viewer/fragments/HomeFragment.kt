@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     private fun onFilmClickListener() {
         topFilmsAdapter.onClick = {
             film ->
-            val action = HomeDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
+            val action = HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
             findNavController().navigate(action)
         }
     }
