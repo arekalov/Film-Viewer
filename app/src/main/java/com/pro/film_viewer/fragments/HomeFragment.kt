@@ -29,7 +29,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModelFactory = HomeFilmsViewModelFactory()
-        topFilmsViewModel = ViewModelProvider(this, viewModelFactory)[HomeFilmsViewModel::class.java]
+        topFilmsViewModel =
+            ViewModelProvider(this, viewModelFactory)[HomeFilmsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             observeNetwork()
             delay(100)
-            checkNetwork()
+            if (connectionLiveData.value == null || connectionLiveData.value == false) lostNetwork()
         }
 
         prepareRecyclerAdapter()
@@ -58,31 +59,31 @@ class HomeFragment : Fragment() {
 
     private fun observeNetwork() {
         connectionLiveData = ConnectionLiveData(requireActivity().application)
-        connectionLiveData.observe(viewLifecycleOwner){
+        connectionLiveData.observe(viewLifecycleOwner) {
         }
     }
 
-    private fun checkNetwork(){
-        if (connectionLiveData.value == null || connectionLiveData.value == false) {
-            findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
-        }
+    private fun lostNetwork() {
+        findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
     }
 
 
     private fun onSearchIconClickListener() {
         binding.ivSearchIcon.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
-            findNavController().navigate(action)
+            if (connectionLiveData.value == false) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
+            } else {
+                val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
+                findNavController().navigate(action)
+            }
         }
     }
 
     private fun onFilmClickListener() {
-        topFilmsAdapter.onClick = {
-            film ->
+        topFilmsAdapter.onClick = { film ->
             if (connectionLiveData.value == false) {
                 findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
-            }
-            else {
+            } else {
                 val action =
                     HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
                 findNavController().navigate(action)
@@ -92,7 +93,8 @@ class HomeFragment : Fragment() {
 
     private fun prepareRecyclerAdapter() {
         topFilmsAdapter = TopFilmsAdapter()
-        val dividerItemDecoration = DividerItemDecoration(binding.rvFilms.context, LinearLayoutManager.VERTICAL)
+        val dividerItemDecoration =
+            DividerItemDecoration(binding.rvFilms.context, LinearLayoutManager.VERTICAL)
         binding.rvFilms.addItemDecoration(dividerItemDecoration)
         binding.rvFilms.apply {
             adapter = topFilmsAdapter
@@ -101,8 +103,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeTopFilms() {
-        topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer {
-            films ->
+        topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer { films ->
             topFilmsAdapter.setTopFilmsList(films)
         })
     }
