@@ -15,7 +15,7 @@ class HomeFilmsViewModel : ViewModel() {
     val topFilmsLiveData = MutableLiveData<List<Item>>()
 
     fun getTopFilms(){
-        KinopoiskApiInstance.api.getTopFilms("e30ffed0-76ab-4dd6-b41f-4c9da2b2735b", "application/json").enqueue(object : Callback<TopFilms>{
+        KinopoiskApiInstance.api.getTopFilms().enqueue(object : Callback<TopFilms>{
             override fun onResponse(call: Call<TopFilms>, response: Response<TopFilms>) {
                 if (response.body() != null) {
                     topFilmsLiveData.value = response.body()!!.items

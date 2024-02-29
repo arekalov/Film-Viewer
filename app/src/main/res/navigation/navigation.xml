@@ -13,8 +13,14 @@
         <action
             android:id="@+id/action_home_menu_item_to_detailFilmFragment"
             app:destination="@id/detailFilmFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim" />
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out">
+            <argument
+                android:name="filmId"
+                app:argType="string"/>
+        </action>
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
@@ -25,5 +31,6 @@
         android:id="@+id/detailFilmFragment"
         android:name="com.pro.film_viewer.fragments.DetailFilmFragment"
         android:label="fragment_detail_film"
-        tools:layout="@layout/fragment_detail_film" />
+        tools:layout="@layout/fragment_detail_film" >
+    </fragment>
 </navigation>

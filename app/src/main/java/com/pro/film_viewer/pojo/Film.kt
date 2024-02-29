@@ -46,4 +46,12 @@ data class Film(
     val type: String,
     val webUrl: String,
     val year: Int
-)
+){
+    public fun getStringGenres(): String {
+        return genres.joinToString(separator = ", ")
+    }
+
+    public fun getStringCountries(): String {
+        return countries.joinToString(separator = ", ")
+    }
+}

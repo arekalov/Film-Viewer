@@ -4,7 +4,8 @@
     <string name="favoriteMenuTitle">Любимые</string>
     <string name="homeMenuTitle">Популярные</string>
     <string name="content">Content</string>
-    <string name="testTitle">FilmName\n</string>
-    <string name="testGenre">genre</string>
-    <string name="testYear">(year)</string>
+    <string name="testTitle">Название фильма</string>
+    <string name="testGenre">Жанры: </string>
+    <string name="testYear">(год)</string>
+    <string name="countries">Страны: </string>
 </resources>

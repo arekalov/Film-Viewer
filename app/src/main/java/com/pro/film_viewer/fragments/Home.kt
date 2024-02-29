@@ -47,7 +47,8 @@ class Home : Fragment() {
     private fun onFilmClickListener() {
         topFilmsAdapter.onClick = {
             film ->
-            findNavController().navigate(R.id.detailFilmFragment)
+            val action = HomeDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
+            findNavController().navigate(action)
         }
     }
 
@@ -64,7 +65,6 @@ class Home : Fragment() {
     private fun observeTopFilms() {
         topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer {
             films ->
-
             topFilmsAdapter.setTopFilmsList(films)
         })
     }
