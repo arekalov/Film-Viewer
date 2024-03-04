@@ -18,6 +18,7 @@ class SearchViewModel : ViewModel() {
                 if (response.body() != null){
                     searchedFilmsLiveData.value = response.body()
                 }
+
                 else{
                     Log.e("error", "response.body = null during searchFilms")
                 }
