@@ -32,6 +32,7 @@
         android:src="@drawable/ic_search"
         android:contentDescription="@string/content"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_films"
         android:layout_width="match_parent"
@@ -39,8 +40,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_search_line"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-194dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"/>
+        tools:layout_editor_absoluteX="16dp" />
 
+    <ImageView
+        android:id="@+id/iv_not_found"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/content"
+        android:src="@drawable/not_found"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_search_line"
+        app:layout_constraintVertical_bias="0.365"
+        android:visibility="invisible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
