@@ -9,4 +9,5 @@
     <string name="testYear">(год)</string>
     <string name="countries">Страны: </string>
     <string name="enterFilmName">Введите название фильма</string>
+    <string name="no_internet">Нет интернета\n</string>
 </resources>

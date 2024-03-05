@@ -26,6 +26,12 @@
             app:destination="@id/searchFragment"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_home_menu_item_to_noInternetFragment"
+            app:destination="@id/noInternetFragment" />
+        <action
+            android:id="@+id/action_home_menu_item_self"
+            app:destination="@id/home_menu_item" />
     </fragment>
     <fragment
         android:id="@+id/favorite_menu_item"
@@ -36,8 +42,7 @@
         android:id="@+id/detailFilmFragment"
         android:name="com.pro.film_viewer.fragments.DetailFilmFragment"
         android:label="fragment_detail_film"
-        tools:layout="@layout/fragment_detail_film" >
-    </fragment>
+        tools:layout="@layout/fragment_detail_film" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.pro.film_viewer.fragments.SearchFragment"
@@ -52,5 +57,17 @@
                 android:name="filmId"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_searchFragment_to_noInternetFragment"
+            app:destination="@id/noInternetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.pro.film_viewer.fragments.NoInternetFragment"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" >
+        <action
+            android:id="@+id/action_noInternetFragment_to_home_menu_item"
+            app:destination="@id/home_menu_item" />
     </fragment>
 </navigation>
