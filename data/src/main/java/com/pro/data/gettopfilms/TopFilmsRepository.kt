@@ -1,4 +1,9 @@
 package com.pro.data.gettopfilms
 
-class TopFilmsRepository {
+import com.pro.data.models.TopFilms
+
+class TopFilmsRepository(private val topFilmsRemoteDataSource: TopFilmsRemoteDataSource) {
+    suspend fun getTopFilms(): TopFilms? {
+        return topFilmsRemoteDataSource.getTopFilms()
+    }
 }
