@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Film_Viewer"
 include(":app")
-include(":data")
