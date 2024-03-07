@@ -17,6 +17,7 @@ import com.pro.film_viewer.adapters.SearchedFilmsAdapter
 import com.pro.film_viewer.viewModel.SearchViewModel
 import com.pro.presentation.R
 import com.pro.presentation.databinding.FragmentSearchBinding
+import com.pro.presentation.viewModel.ConnectionLiveData
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private lateinit var filmsAdapter: SearchedFilmsAdapter
     private lateinit var searchedFilmsViewModel: SearchViewModel
-//    private lateinit var connectionLiveData: ConnectionLiveData
+    private lateinit var connectionLiveData: ConnectionLiveData
 
     companion object {
         fun newInstance() = SearchFragment()
@@ -63,13 +64,13 @@ class SearchFragment : Fragment() {
         observeEditSearchLine()
     }
 
-//    private fun observeConnection() {
-//        connectionLiveData.observe(viewLifecycleOwner){isConnected->
-//            if (!isConnected) {
-//                findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToNoInternetFragment())
-//            }
-//        }
-//    }
+    private fun observeConnection() {
+        connectionLiveData.observe(viewLifecycleOwner){isConnected->
+            if (!isConnected) {
+                findNavController().navigate(SearchFragmentDirections.actionSearchFragmentToNoInternetFragment())
+            }
+        }
+    }
 
     private fun observeEditSearchLine() {
         var searchJob: Job? = null

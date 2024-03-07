@@ -8,10 +8,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.pro.presentation.R
+import com.pro.presentation.viewModel.ConnectionLiveData
 
 
 class NoInternetFragment : Fragment() {
-//    private lateinit var connectionLiveData: ConnectionLiveData
+    private lateinit var connectionLiveData: ConnectionLiveData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val onBackPressedCallback = object : OnBackPressedCallback(true) {
@@ -31,18 +32,18 @@ class NoInternetFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        connectionLiveData = ConnectionLiveData(requireActivity().application)
-//        observeConnection()
+        connectionLiveData = ConnectionLiveData(requireActivity().application)
+        observeConnection()
     }
 
-//    private fun observeConnection() {
-//        connectionLiveData.observe(viewLifecycleOwner){
-//            isConnected->
-//            if (isConnected) {
-//                val controller = findNavController()
-//                controller.previousBackStackEntry?.destination?.id?.let { controller.navigate(it) }
-//            }
-//        }
-//    }
+    private fun observeConnection() {
+        connectionLiveData.observe(viewLifecycleOwner){
+            isConnected->
+            if (isConnected) {
+                val controller = findNavController()
+                controller.previousBackStackEntry?.destination?.id?.let { controller.navigate(it) }
+            }
+        }
+    }
 
 }

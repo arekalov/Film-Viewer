@@ -17,6 +17,7 @@ import com.pro.film_viewer.adapters.TopFilmsAdapter
 import com.pro.film_viewer.viewModel.HomeFilmsViewModel
 import com.pro.film_viewer.viewModel.HomeFilmsViewModelFactory
 import com.pro.presentation.databinding.FragmentHomeBinding
+import com.pro.presentation.viewModel.ConnectionLiveData
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var topFilmsAdapter: TopFilmsAdapter
     private lateinit var topFilmsViewModel: HomeFilmsViewModel
+    private lateinit var connectionLiveData: ConnectionLiveData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModelFactory = HomeFilmsViewModelFactory()
@@ -34,7 +36,8 @@ class HomeFragment : Fragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-        topFilmsViewModel = ViewModelProvider(this, viewModelFactory)[HomeFilmsViewModel::class.java]
+        topFilmsViewModel =
+            ViewModelProvider(this, viewModelFactory)[HomeFilmsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -47,11 +50,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        lifecycleScope.launch {
-//            observeNetwork()
-//            delay(100)
-//            if (connectionLiveData.value == null || connectionLiveData.value == false) lostNetwork()
-//        }
+        lifecycleScope.launch {
+            observeNetwork()
+            delay(1000)
+            if (connectionLiveData.value == null || connectionLiveData.value == false) lostNetwork()
+        }
 
         prepareRecyclerAdapter()
         topFilmsViewModel.getTopFilms()
@@ -61,11 +64,11 @@ class HomeFragment : Fragment() {
         onSearchIconClickListener()
     }
 
-//    private fun observeNetwork() {
-//        connectionLiveData = ConnectionLiveData(requireActivity().application)
-//        connectionLiveData.observe(viewLifecycleOwner) {
-//        }
-//    }
+    private fun observeNetwork() {
+        connectionLiveData = ConnectionLiveData(requireActivity().application)
+        connectionLiveData.observe(viewLifecycleOwner) {
+        }
+    }
 
     private fun lostNetwork() {
         findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
@@ -74,45 +77,42 @@ class HomeFragment : Fragment() {
 
     private fun onSearchIconClickListener() {
         binding.ivSearchIcon.setOnClickListener {
-//            if (connectionLiveData.value == false) {
-//                findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
-//            } else {
-//                val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
-//                findNavController().navigate(action)
-//            }
-            val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
+            if (connectionLiveData.value == false) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
+            } else {
+                val action = HomeFragmentDirections.actionHomeMenuItemToSearchFragment()
                 findNavController().navigate(action)
+            }
         }
     }
 
-    private fun onFilmClickListener() {
-        topFilmsAdapter.onClick = { film ->
-//            if (connectionLiveData.value == false) {
-//                findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
-//            } else {
-//                val action =
-//                    HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
-//                findNavController().navigate(action)
-//            }
-            val action = HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
-                findNavController().navigate(action)
+        private fun onFilmClickListener() {
+            topFilmsAdapter.onClick = { film ->
+                if (connectionLiveData.value == false) {
+                    findNavController().navigate(HomeFragmentDirections.actionHomeMenuItemToNoInternetFragment())
+                } else {
+                    val action =
+                        HomeFragmentDirections.actionHomeMenuItemToDetailFilmFragment(film.kinopoiskId.toString())
+                    findNavController().navigate(action)
+                }
+            }
         }
-    }
 
-    private fun prepareRecyclerAdapter() {
-        topFilmsAdapter = TopFilmsAdapter()
-        val dividerItemDecoration =
-            DividerItemDecoration(binding.rvFilms.context, LinearLayoutManager.VERTICAL)
-        binding.rvFilms.addItemDecoration(dividerItemDecoration)
-        binding.rvFilms.apply {
-            adapter = topFilmsAdapter
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        private fun prepareRecyclerAdapter() {
+            topFilmsAdapter = TopFilmsAdapter()
+            val dividerItemDecoration =
+                DividerItemDecoration(binding.rvFilms.context, LinearLayoutManager.VERTICAL)
+            binding.rvFilms.addItemDecoration(dividerItemDecoration)
+            binding.rvFilms.apply {
+                adapter = topFilmsAdapter
+                layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            }
         }
-    }
 
-    private fun observeTopFilms() {
-        topFilmsViewModel.observeTopFilmsLiveData().observe(viewLifecycleOwner, Observer { films ->
-            topFilmsAdapter.setTopFilmsList(films)
-        })
-    }
+        private fun observeTopFilms() {
+            topFilmsViewModel.observeTopFilmsLiveData()
+                .observe(viewLifecycleOwner, Observer { films ->
+                    topFilmsAdapter.setTopFilmsList(films)
+                })
+        }
 }
