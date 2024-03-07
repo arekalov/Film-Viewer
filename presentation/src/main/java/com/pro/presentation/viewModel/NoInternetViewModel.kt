@@ -1,4 +1,4 @@
-package com.pro.film_viewer.retrofit
+package com.pro.presentation.viewModel
 
 import android.app.Application
 import android.content.Context
@@ -15,19 +15,19 @@ class ConnectionLiveData(private val connectivityManager: ConnectivityManager) :
     )
 
     private val networkCallback =
-    object : ConnectivityManager.NetworkCallback(){
+        object : ConnectivityManager.NetworkCallback(){
 
-        override fun onAvailable(network: Network) {
-            super.onAvailable(network)
-            postValue(true)
+            override fun onAvailable(network: Network) {
+                super.onAvailable(network)
+                postValue(true)
+            }
+
+            override fun onLost(network: Network) {
+                super.onLost(network)
+                postValue(false)
+            }
+
         }
-
-        override fun onLost(network: Network) {
-            super.onLost(network)
-            postValue(false)
-        }
-
-    }
 
     override fun onActive() {
         super.onActive()

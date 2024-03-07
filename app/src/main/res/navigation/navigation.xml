@@ -2,72 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
+    android:id="@+id/nav_main"
     app:startDestination="@id/home_menu_item">
-
-    <fragment
-        android:id="@+id/home_menu_item"
-        android:name="com.pro.film_viewer.fragments.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_home_menu_item_to_detailFilmFragment"
-            app:destination="@id/detailFilmFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out">
-            <argument
-                android:name="filmId"
-                app:argType="string"/>
-        </action>
-        <action
-            android:id="@+id/action_home_menu_item_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
-            android:id="@+id/action_home_menu_item_to_noInternetFragment"
-            app:destination="@id/noInternetFragment" />
-        <action
-            android:id="@+id/action_home_menu_item_self"
-            app:destination="@id/home_menu_item" />
-    </fragment>
-    <fragment
-        android:id="@+id/favorite_menu_item"
-        android:name="com.pro.film_viewer.fragments.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
-    <fragment
-        android:id="@+id/detailFilmFragment"
-        android:name="com.pro.film_viewer.fragments.DetailFilmFragment"
-        android:label="fragment_detail_film"
-        tools:layout="@layout/fragment_detail_film" />
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.pro.film_viewer.fragments.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_to_detailFilmFragment"
-            app:destination="@id/detailFilmFragment"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim">
-            <argument
-                android:name="filmId"
-                app:argType="string"/>
-        </action>
-        <action
-            android:id="@+id/action_searchFragment_to_noInternetFragment"
-            app:destination="@id/noInternetFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/noInternetFragment"
-        android:name="com.pro.film_viewer.fragments.NoInternetFragment"
-        android:label="fragment_no_internet"
-        tools:layout="@layout/fragment_no_internet" >
-        <action
-            android:id="@+id/action_noInternetFragment_to_home_menu_item"
-            app:destination="@id/home_menu_item" />
-    </fragment>
+    <include app:graph="@navigation/presentation_navigation"/>
 </navigation>
