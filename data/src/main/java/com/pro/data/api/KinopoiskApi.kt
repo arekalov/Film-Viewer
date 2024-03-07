@@ -26,8 +26,8 @@ internal interface KinopoiskApi {
         "Content-Type: application/json"
     )
     @GET("api/v2.2/films/collections")
-    suspend fun getTopFilms(
-    ): Response<TopFilms>
+    fun getTopFilms(
+    ): Call<TopFilms>
 
     @Headers(
         "X-API-KEY: e30ffed0-76ab-4dd6-b41f-4c9da2b2735b",

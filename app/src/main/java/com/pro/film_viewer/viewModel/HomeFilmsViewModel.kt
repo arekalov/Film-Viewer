@@ -4,12 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.pro.data.gettopfilms.TopFilmsRepository
+import com.pro.data.repositories.TopFilmsRepository
 import com.pro.data.models.FilmOfTop
-import kotlinx.coroutines.Dispatchers
+import com.pro.data.models.TopFilms
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFilmsViewModel : ViewModel() {
     var topFilmsLiveData = MutableLiveData<List<FilmOfTop>>()
@@ -17,10 +19,20 @@ class HomeFilmsViewModel : ViewModel() {
 
     fun getTopFilms() {
         viewModelScope.launch {
-            val answer = topFilmsRepository.getTopFilms()
-            if (true) {
-                topFilmsLiveData.postValue(answer!!.items)
-            }
+            topFilmsRepository.getTopFilms().enqueue(object : Callback<TopFilms>{
+                override fun onResponse(call: Call<TopFilms>, response: Response<TopFilms>) {
+                    if (response.body() != null) {
+                        topFilmsLiveData.value = response.body()!!.items
+                    }
+                    else {
+                        Log.e("error", "getTopFilms error")
+                    }
+                }
+
+                override fun onFailure(call: Call<TopFilms>, t: Throwable) {
+                    Log.e("error", "getTopFilms null body")
+                }
+            })
         }
     }
 
