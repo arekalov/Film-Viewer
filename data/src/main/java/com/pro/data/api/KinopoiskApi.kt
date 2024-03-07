@@ -9,7 +9,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface KinopoiskApi {
+internal interface KinopoiskApi {
 
     @Headers(
         "X-API-KEY: e30ffed0-76ab-4dd6-b41f-4c9da2b2735b",
