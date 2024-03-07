@@ -56,8 +56,8 @@ class HomeFragment : Fragment() {
         }
 
         prepareRecyclerAdapter()
-        observeTopFilms()
         topFilmsViewModel.getTopFilms()
+        observeTopFilms()
         onFilmClickListener()
 
         onSearchIconClickListener()

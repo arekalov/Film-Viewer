@@ -17,7 +17,7 @@ internal interface KinopoiskApi {
         "Content-Type: application/json"
     )
     @GET("api/v2.2/films/{id}")
-    suspend fun getFilmById(
+    fun getFilmById(
         @Path("id") id: String
     ): Call<Film>
 
@@ -34,6 +34,6 @@ internal interface KinopoiskApi {
         "Content-Type: application/json"
     )
     @GET("api/v2.1/films/search-by-keyword?")
-    suspend fun searchFilms(@Query("keyword") keyword: String): Call<SearchedFilms>
+    fun searchFilms(@Query("keyword") keyword: String): Call<SearchedFilms>
 
 }

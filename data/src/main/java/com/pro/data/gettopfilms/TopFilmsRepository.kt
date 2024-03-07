@@ -1,9 +1,10 @@
 package com.pro.data.gettopfilms
 
+import com.pro.data.api.KinopoiskApiInstance
 import com.pro.data.models.TopFilms
 
-class TopFilmsRepository(private val topFilmsRemoteDataSource: TopFilmsRemoteDataSource) {
+class TopFilmsRepository() {
     suspend fun getTopFilms(): TopFilms? {
-        return topFilmsRemoteDataSource.getTopFilms()
+        return KinopoiskApiInstance.api.getTopFilms().body()
     }
 }
