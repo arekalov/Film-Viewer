@@ -4,31 +4,36 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pro.film_viewer.pojo.Film
-import com.pro.film_viewer.retrofit.KinopoiskApiInstance
+import androidx.lifecycle.viewModelScope
+import com.pro.data.repositories.FilmRepository
+import com.pro.data.models.Film
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class DetailFilmViewModel : ViewModel() {
+    val filmRepository = FilmRepository()
     val detailFilmLiveData = MutableLiveData<Film>()
 
-    fun getDetailFilm(id : String) {
-        KinopoiskApiInstance.api.getFilmById(id).enqueue(object : Callback<Film>{
-            override fun onResponse(call: Call<Film>, response: Response<Film>) {
-                if (response.body() != null) {
-                    detailFilmLiveData.value = response.body()
+    fun getDetailFilm(id: String) {
+        viewModelScope.launch {
+            filmRepository.getFilm(id).enqueue(object : Callback<Film>{
+                override fun onResponse(call: Call<Film>, response: Response<Film>) {
+                    if (response.body() != null && response.isSuccessful) {
+                        detailFilmLiveData.value = response.body()
+                    }
+                    else {
+                        Log.e("error", "getDetailFilm: null response body", )
+                    }
                 }
-                else {
-                    Log.e("error", "null body during getDetailFilm")
+
+                override fun onFailure(call: Call<Film>, t: Throwable) {
+                    Log.e("error", "getDetailFilm: error", )
                 }
-            }
 
-            override fun onFailure(call: Call<Film>, t: Throwable) {
-                Log.e("error", "error during getDetailFilm")
-            }
-
-        })
+            })
+        }
     }
 
     fun observeDetailFilmLiveData(): LiveData<Film> = detailFilmLiveData;
