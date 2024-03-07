@@ -1,15 +1,16 @@
-package com.pro.film_viewer.retrofit
+package com.pro.data.api
 
-import com.pro.film_viewer.pojo.Film
-import com.pro.film_viewer.pojo.SearchedFilms
-import com.pro.film_viewer.pojo.TopFilms
+import com.pro.data.models.Film
+import com.pro.data.models.SearchedFilms
+import com.pro.data.models.TopFilms
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface KinopoiskApi {
+internal interface KinopoiskApi {
 
     @Headers(
         "X-API-KEY: e30ffed0-76ab-4dd6-b41f-4c9da2b2735b",

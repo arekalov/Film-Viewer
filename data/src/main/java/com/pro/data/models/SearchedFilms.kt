@@ -1,4 +1,4 @@
-package com.pro.film_viewer.pojo
+package com.pro.data.models
 
 data class SearchedFilms(
     val films: List<FilmSearched>,

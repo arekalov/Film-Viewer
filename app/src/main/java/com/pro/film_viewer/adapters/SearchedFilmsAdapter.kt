@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.pro.data.models.FilmSearched
 import com.pro.film_viewer.databinding.FilmCardBinding
-import com.pro.film_viewer.pojo.FilmSearched
 
 class SearchedFilmsAdapter : RecyclerView.Adapter<SearchedFilmsAdapter.SearchedFilmViewHolder>() {
     inner class SearchedFilmViewHolder(val binding: FilmCardBinding) : RecyclerView.ViewHolder(binding.root)
