@@ -1,11 +1,11 @@
 package com.pro.film_viewer.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.pro.film_viewer.R
+import androidx.fragment.app.Fragment
+import com.pro.presentation.R
 
 class FavoriteFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

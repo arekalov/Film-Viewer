@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.pro.film_viewer.R
-import com.pro.film_viewer.retrofit.ConnectionLiveData
+import com.pro.presentation.R
+import com.pro.presentation.viewModel.ConnectionLiveData
 
 
 class NoInternetFragment : Fragment() {

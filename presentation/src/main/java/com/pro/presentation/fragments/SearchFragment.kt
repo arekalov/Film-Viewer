@@ -1,26 +1,23 @@
 package com.pro.film_viewer.fragments
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pro.film_viewer.R
 import com.pro.film_viewer.adapters.SearchedFilmsAdapter
-import com.pro.film_viewer.databinding.FragmentSearchBinding
-import com.pro.film_viewer.retrofit.ConnectionLiveData
+//import com.pro.film_viewer.retrofit.ConnectionLiveData
 import com.pro.film_viewer.viewModel.SearchViewModel
+import com.pro.presentation.R
+import com.pro.presentation.databinding.FragmentSearchBinding
+import com.pro.presentation.viewModel.ConnectionLiveData
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -56,8 +53,8 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        connectionLiveData = ConnectionLiveData(requireActivity().application)
-        observeConnection()
+//        connectionLiveData = ConnectionLiveData(requireActivity().application)
+//        observeConnection()
 
         searchedFilmsViewModel = SearchViewModel()
         onClickSearhIcon()
